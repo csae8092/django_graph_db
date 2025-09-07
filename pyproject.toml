@@ -1,0 +1,16 @@
+[project]
+name = "django-graph-db"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "django>=5.2.6",
+    "pgvector>=0.4.1",
+    "psycopg2-binary>=2.9.10",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.12.12",
+]
