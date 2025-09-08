@@ -1,3 +1,4 @@
+import numpy as np
 from django.db import models
 from langchain_openai import OpenAIEmbeddings
 from pgvector.django import HnswIndex, VectorField
@@ -60,14 +61,14 @@ class TextSnippet(DateStampedModel):
         ]
 
     def __str__(self):
-        if self.embedding.any():
+        if isinstance(self.embedding, np.ndarray):
             vector = "✓"
         else:
             vector = "✗"
-        return f"{vector}: {self.content[:20]}... ({self.collection}))"
+        return f"{vector}: {self.content[:25]}... ({self.collection}))"
 
     def embedd_content(self):
-        if self.conent and not self.embedding.any():
+        if self.content and not isinstance(self.embedding, np.ndarray):
             embedding = embeddings.embed_documents([self.content])
             self.embedding = embedding[0]
             self.save()
