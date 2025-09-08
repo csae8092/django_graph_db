@@ -1,5 +1,8 @@
 from django.db import models
-from pgvector.django import VectorField
+from langchain_openai import OpenAIEmbeddings
+from pgvector.django import HnswIndex, VectorField
+
+embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
 
 
 class DateStampedModel(models.Model):
@@ -46,3 +49,26 @@ class TextSnippet(DateStampedModel):
         verbose_name = "Text Snippet"
         verbose_name_plural = "Text Snippets"
         unique_together = ("collection", "text_id")
+        indexes = [
+            HnswIndex(
+                name="textsnippetindex",
+                fields=["embedding"],
+                m=16,
+                ef_construction=64,
+                opclasses=["vector_l2_ops"],
+            )
+        ]
+
+    def __str__(self):
+        if self.embedding.any():
+            vector = "✓"
+        else:
+            vector = "✗"
+        return f"{vector}: {self.content[:20]}... ({self.collection}))"
+
+    def embedd_content(self):
+        if self.conent and not self.embedding.any():
+            embedding = embeddings.embed_documents([self.content])
+            self.embedding = embedding[0]
+            self.save()
+        return embedding
