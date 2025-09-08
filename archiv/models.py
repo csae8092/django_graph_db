@@ -46,7 +46,7 @@ class TextSnippet(DateStampedModel):
     )
 
     class Meta:
-        ordering = ["text_id"]
+        ordering = ["-updated_at"]
         verbose_name = "Text Snippet"
         verbose_name_plural = "Text Snippets"
         unique_together = ("collection", "text_id")
