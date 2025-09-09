@@ -72,4 +72,3 @@ class TextSnippet(DateStampedModel):
             embedding = embeddings.embed_documents([self.content])
             self.embedding = embedding[0]
             self.save()
-        return embedding
