@@ -1,7 +1,7 @@
 import numpy as np
 from django.db import models
 from langchain_openai import OpenAIEmbeddings
-from pgvector.django import HnswIndex, VectorField
+from pgvector.django import CosineDistance, HnswIndex, VectorField
 
 embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
 
@@ -72,3 +72,14 @@ class TextSnippet(DateStampedModel):
             embedding = embeddings.embed_documents([self.content])
             self.embedding = embedding[0]
             self.save()
+
+    def find_similar(self, collection_title: str = "__all__", amount: str = 3):
+        if collection_title == "__all__":
+            qs = TextSnippet.objects.all()
+        else:
+            col = Collection.objects.filter(title__icontains=collection_title)
+            qs = TextSnippet.objects.filter(collection__in=col)
+        qs = qs.annotate(distance=CosineDistance("embedding", self.embedding)).order_by(
+            "distance"
+        )[:amount]
+        return qs
