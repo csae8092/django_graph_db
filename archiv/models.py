@@ -1,5 +1,6 @@
 import numpy as np
 from django.db import models
+from langchain_core.documents import Document
 from langchain_openai import OpenAIEmbeddings
 from pgvector.django import CosineDistance, HnswIndex, VectorField
 
@@ -83,3 +84,11 @@ class TextSnippet(DateStampedModel):
             "distance"
         )[:amount]
         return qs
+
+    def as_langchain_doc(self) -> Document:
+        doc = Document(
+            page_content=self.content,
+            metadata={"source": self.collection.title, "id": self.text_id},
+            id=self.text_id,
+        )
+        return doc
