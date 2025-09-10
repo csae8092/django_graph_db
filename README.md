@@ -22,3 +22,5 @@ uv run manage.py import_jad_full_texts
 ```shell
 uv run manage.py import_vulgata
 ```
+
+> don in 3 hours (~1.5M input tokens)
