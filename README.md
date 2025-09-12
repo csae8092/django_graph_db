@@ -23,7 +23,7 @@ uv run manage.py import_jad_full_texts
 uv uv run manage.py import_jad_sentences
 ```
 
-> done in ???
+> done in 1:44:50 (~700K input tokens)
 
 
 ### import Vulgata (32.921 verses)
