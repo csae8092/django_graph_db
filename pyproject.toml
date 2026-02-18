@@ -10,6 +10,7 @@ dependencies = [
     "django>=5.2.6",
     "django-extensions>=4.1",
     "django-spaghetti-and-meatballs>=0.4.2",
+    "gunicorn>=25.1.0",
     "langchain>=0.3.27",
     "langchain-openai>=0.3.32",
     "pandas>=2.3.2",
