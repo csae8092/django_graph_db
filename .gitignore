@@ -12,3 +12,4 @@ wheels/
 # Virtual environments
 .venv
 .git
+django_graph_db_dump.sql

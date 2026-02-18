@@ -29,3 +29,4 @@ venv/
 .secret
 .env
 *.ipynb
+django_graph_db_dump.sql
