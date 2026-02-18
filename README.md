@@ -22,6 +22,10 @@ docker run -it --network="host" --rm --env-file .env jadgraphdb:latest
 
 http://127.0.0.1:8000/jad/q?jad-id=jad_occurrence__1&max-distance=0.09&amount=3
 
+### compare jad passages with vulgata
+
+http://127.0.0.1:8000/jad/q?jad-id=jad_occurrence__1&max-distance=0.3&amount=3&collection-title=Vulgata
+
 
 ### import JAD (short) Passages:
 ```shell

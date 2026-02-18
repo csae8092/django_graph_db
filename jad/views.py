@@ -8,6 +8,9 @@ def find_similar_passages(request):
     jad_id = request.GET.get("jad-id")
     amount = request.GET.get("amount", 3)
     max_distance = request.GET.get("max-distance", 0.02)
+    collection_title = request.GET.get("collection-title", "JAD sentences")
+    if collection_title not in ["JAD sentences", "Vulgata"]:
+        collection_title = "JAD sentences"
     try:
         max_distance = float(max_distance)
     except ValueError:
@@ -19,7 +22,6 @@ def find_similar_passages(request):
         amount = int(amount)
     except ValueError:
         amount = 3
-    amount += 1
     if amount > 10:
         amount = 10
     payload = {}
@@ -37,9 +39,9 @@ def find_similar_passages(request):
             for x in items:
                 item = {"id": x.text_id, "text": x.content, "similar": []}
                 for y in x.find_similar(
-                    collection_title="JAD sentences", amount=amount
+                    collection_title=collection_title, amount=amount
                 ):
-                    if y.distance < max_distance:
+                    if y.distance < max_distance and y.text_id != x.text_id:
                         item["similar"].append(
                             {
                                 "id": y.text_id,

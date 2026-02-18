@@ -77,7 +77,7 @@ class TextSnippet(DateStampedModel):
             self.embedding = embedding[0]
             self.save()
 
-    def find_similar(self, collection_title: str = "__all__", amount: str = 4):
+    def find_similar(self, collection_title: str = "__all__", amount: str = 3):
         if collection_title == "__all__":
             qs = TextSnippet.objects.all()
         else:
@@ -85,7 +85,7 @@ class TextSnippet(DateStampedModel):
             qs = TextSnippet.objects.filter(collection__in=col)
         qs = qs.annotate(distance=CosineDistance("embedding", self.embedding)).order_by(
             "distance"
-        )[1:amount]
+        )[:amount]
         return qs
 
     def as_langchain_doc(self) -> Document:
