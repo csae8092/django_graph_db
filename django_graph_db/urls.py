@@ -5,4 +5,5 @@ from django.urls import path
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("webpage.urls", namespace="webpage")),
+    path("jad/", include("jad.urls", namespace="jad")),
 ]
