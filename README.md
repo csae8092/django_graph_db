@@ -3,6 +3,21 @@
 A Grah Database implementation in Django
 
 
+## Docker
+
+### building the image
+
+```shell
+docker build -t jadgraphdb:latest .
+```
+
+### running the image
+
+```shell
+docker run -it --network="host" --rm --env-file .env jadgraphdb:latest
+```
+
+
 ### query by jad_id
 
 http://127.0.0.1:8000/jad/q?jad-id=jad_occurrence__1&max-distance=0.09&amount=3
