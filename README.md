@@ -3,6 +3,11 @@
 A Grah Database implementation in Django
 
 
+### query by jad_id
+
+http://127.0.0.1:8000/jad/q?jad-id=jad_occurrence__1&max-distance=0.09&amount=3
+
+
 ### import JAD (short) Passages:
 ```shell
 uv run manage.py import_jad_passages
