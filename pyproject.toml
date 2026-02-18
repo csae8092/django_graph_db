@@ -5,8 +5,11 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
+    "acdh-django-browsing>=3.3.2",
+    "crispy-bootstrap5>=2025.6",
     "django>=5.2.6",
     "django-extensions>=4.1",
+    "django-spaghetti-and-meatballs>=0.4.2",
     "langchain>=0.3.27",
     "langchain-openai>=0.3.32",
     "pandas>=2.3.2",
