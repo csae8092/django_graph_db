@@ -4,7 +4,10 @@ from langchain_core.documents import Document
 from langchain_openai import OpenAIEmbeddings
 from pgvector.django import CosineDistance, HnswIndex, VectorField
 
-embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
+try:
+    embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
+except Exception as e:
+    print(f"you might want to set OPENAI_API_KEY as env variable due to: {e}")
 
 
 class DateStampedModel(models.Model):
