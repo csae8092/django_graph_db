@@ -156,3 +156,6 @@ SPAGHETTI_SAUCE = {
     "show_fields": False,
     "exclude": {"auth": ["user"]},
 }
+
+ACDH_IMPRINT_URL = "https://imprint.acdh.oeaw.ac.at/"
+REDMINE_ID = os.environ.get("REDMINE_ID", 27526)
