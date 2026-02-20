@@ -14,3 +14,4 @@ wheels/
 .git
 django_graph_db_dump.sql
 db_dump.zip
+lm-studio-chat.md
